@@ -1,0 +1,26 @@
+{
+  "name": "shop",
+  "version": "1.0.0",
+  "description": "Simple shop app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "keywords": [
+    "shop"
+  ],
+  "author": "Andriy Moskalenko <benjaminfranclin@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "promised-sqlite3": "^2.1.0",
+    "sqlite3": "^5.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
