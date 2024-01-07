@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROBOSHOP</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <main>
+        
+        <header>
+            <h1 class="logo">Welcome to ROBOSHOP</h1>
+            <div class="auth">
+                <a href="/auth/login">login</a>
+                <span>|</span>
+                <a href="/auth/register">register</a>
+            </div>
+        </header>
+        
+        <div class="form_container">
+
+            <form id="register_form" class="form">
+                <div class="form_field">
+                    <label for="login">Login</label>
+                    <div class="input_wrapper">
+                        <input type="text" id="login" name="login" placeholder="login" required minlength="3">
+                    </div>
+                </div>
+    
+                <div class="form_field">
+                    <label for="password">Password</label>
+                    <div class="input_wrapper">
+                        <input type="password" id="password" name="password" placeholder="password" minlength="8" required>
+                    </div>
+                </div>
+    
+                <div class="form_field">
+                    <label for="phone">Phone</label>
+                    <div class="input_wrapper">
+                        <input type="tel" id="phone" name="phone" placeholder="+380" pattern="^\+380\d{9}$" required>
+                    </div>
+                </div>
+    
+                <button type="submit">
+                    Create account
+                </button>
+    
+            </form>
+
+        </div>
+                
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
