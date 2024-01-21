@@ -1,14 +1,13 @@
-const form = document.getElementById('register_form');
+const form = document.getElementById('login_form');
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const payload = {
         login: form.login.value,
-        password: form.password.value,
-        phone: form.phone.value
+        password: form.password.value
     };
    
-    const response = await fetch('/api/auth/register', {
+    const response = await fetch('/api/auth/login', {
         method: 'POST',
         body:  JSON.stringify(payload),
         headers: {
@@ -16,11 +15,15 @@ form.addEventListener('submit', async (event) => {
         }
     });
 
-    if(response.status == 201) {
-        form.reset();
-    }
-
     const result = await response.json();
     
     alert(result.message);
+    
+    if(response.status == 200) {
+        checkAuth();
+        form.reset();
+        setTimeout(() => {
+            window.location = '/';
+        }, 2000);
+    }
 })

@@ -15,4 +15,11 @@ async function registerUser(login, hashedPassword, phone) {
     return result.lastID;
 }
 
-module.exports = {isUserExists, registerUser};
+async function getUserByLogin(login) {
+    const db = await getConnection();
+    const candidate = await db.get('SELECT * FROM user WHERE login = ?', login);
+    db.close();
+    return candidate;
+}
+
+module.exports = {isUserExists, registerUser, getUserByLogin};

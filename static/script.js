@@ -1,5 +1,3 @@
-
-
 async function initProducts() {
     const productsContainerElem = document.getElementById('products_container');
 
@@ -12,7 +10,7 @@ async function initProducts() {
             <a class="product_name" href="/product?id=${p.id}">${p.name}</a>
             <div class="product_footer">
                 <p class="product_price"> ${p.price}UAH </p>
-                <button class="product_btn">Add to cart</button>
+                <button class="product_btn" onclick="addToCart(${p.id})">Add to cart</button>
             </div>
         </div>
     `);
@@ -22,3 +20,15 @@ async function initProducts() {
 }
 
 initProducts();
+
+async function addToCart(id) {
+
+    const response = await fetch('/api/cart', {
+        method: 'POST',
+        body:  JSON.stringify({id}),
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+
+}
