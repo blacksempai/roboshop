@@ -1,16 +1,25 @@
 const express = require('express');
+const cartService = require('../services/cart.service');
 const router = express.Router();
 
-router.post('', (req, res) => {
-    const {id} = req.body;
+router.get('', async (req, res) => {
+    const {cart_id} = req.user;
+    const cart = await cartService.getCart(cart_id);
+    if(!cart) {
+        return res.status(500).send({message: 'Cart with such id doesn\'t exists'});
+    }
+    return res.send(cart);
+});
 
-    if(!id) {
+router.put('/item', async (req, res) => {
+    const {product_id} = req.body;
+    const {cart_id} = req.user;
+
+    if(!product_id) {
         return res.status(400).send({message: 'Specify product please'});
     }
 
-    console.log(req.user);
-
-    //. . .
+    await cartService.addProductToCart(cart_id, product_id);
 
     return res.status(201).send({message: 'Product have been added to cart'});
 });

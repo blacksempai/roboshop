@@ -31,6 +31,7 @@ const doMigration = async () => {
             price INTEGER NOT NULL,
             description TEXT NOT NULL,
             supplier_id INTEGER,
+            photo_url TEXT,
             FOREIGN KEY (supplier_id) REFERENCES supplier(id)
         )
     `);

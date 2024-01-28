@@ -20,8 +20,15 @@ function checkAuth() {
     const token = getCookie('token');
     if(token) {
         const authContainer = document.getElementById('auth');
-        authContainer.innerHTML = '<a href="/cart">Cart</a>';
+        if (authContainer) {
+          authContainer.innerHTML = '<a href="/cart">Cart</a>';
+        }
     }
+}
+
+function isAuth() {
+  const token = getCookie('token');
+  return !!token;
 }
 
 checkAuth();

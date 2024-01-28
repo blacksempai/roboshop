@@ -21,11 +21,11 @@ async function initProducts() {
 
 initProducts();
 
-async function addToCart(id) {
+async function addToCart(product_id) {
 
-    const response = await fetch('/api/cart', {
-        method: 'POST',
-        body:  JSON.stringify({id}),
+    const response = await fetch('/api/cart/item', {
+        method: 'PUT',
+        body:  JSON.stringify({product_id}),
         headers: {
             "Content-Type": "application/json",
         }
