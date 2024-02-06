@@ -32,4 +32,24 @@ async function addProductToCart(cart_id, product_id) {
     return;
 } 
 
-module.exports = {getCart, addProductToCart};
+async function deleteProductFromCart(cart_id, product_id){
+    const db = await getConnection();
+
+    const candidate = await db.get(`
+        SELECT * FROM cart_product WHERE cart_id = ? AND product_id = ?
+    `, cart_id, product_id);
+
+    if(!candidate){
+        throw 'This product doesn`t exist in your cart'
+    }
+    if(candidate.quantity>1){
+        await db.run('UPDATE cart_product SET quantity = ? WHERE id = ?',candidate.quantity - 1, candidate.id);
+        return;
+    }
+    await db.run('DELETE FROM cart_product WHERE id = ?', candidate.id);
+    
+    db.close();
+    return;
+}
+
+module.exports = {getCart, addProductToCart, deleteProductFromCart};

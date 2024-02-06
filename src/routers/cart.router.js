@@ -24,4 +24,16 @@ router.put('/item', async (req, res) => {
     return res.status(201).send({message: 'Product have been added to cart'});
 });
 
+router.delete('/item/:product_id', async (req, res) => {
+    try{
+        const {product_id} = req.params;
+        const {cart_id} = req.user;
+        await cartService.deleteProductFromCart(cart_id, product_id);
+        return res.status(204).end();
+    }
+    catch(e){
+        return res.status(500).send({message: e})
+    }
+});
+
 module.exports = router;
