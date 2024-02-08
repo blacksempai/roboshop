@@ -3,8 +3,8 @@ const form = document.getElementById('login_form');
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const payload = {
-        login: form.login.value,
-        password: form.password.value
+        login: form.login.value.trim(),
+        password: form.password.value.trim()
     };
    
     const response = await fetch('/api/auth/login', {

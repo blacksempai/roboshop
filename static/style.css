@@ -86,3 +86,8 @@ header .logo {
     border-radius: 8px;
     border: 2px solid #3c3c3c78;
 }
+
+.t {
+    width: 100%;
+    border: 0;
+}

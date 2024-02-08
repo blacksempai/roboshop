@@ -21,7 +21,7 @@ function checkAuth() {
     if(token) {
         const authContainer = document.getElementById('auth');
         if (authContainer) {
-          authContainer.innerHTML = '<a href="/cart">Cart</a>';
+          authContainer.innerHTML = '<a href="/cart">Cart</a> | <a href="/api/auth/logout">Logout</a>';
         }
     }
 }

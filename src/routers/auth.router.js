@@ -5,8 +5,10 @@ const bcrypt = require('bcrypt');
 const jsw = require('jsonwebtoken');
 
 router.post('/register', async (req, res) => {
-    const {login, password, phone} = req.body;
-
+    const login = req.body.login.trim();
+    const password = req.body.password.trim();
+    const phone = req.body.phone.trim();
+ 
     if(!login || !password || !phone) {
         return res.status(400).send({message: 'Please fill all required fields (login, password, phone)'});
     }
@@ -28,7 +30,8 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    const {login, password} = req.body;
+    const login = req.body.login.trim();
+    const password = req.body.password.trim();
 
     if(!login || !password) {
         return res.status(400).send({message: 'Please fill all required fields (login, password)'});
@@ -57,6 +60,11 @@ router.post('/login', async (req, res) => {
     res.cookie('token', token);
     
     return res.status(200).send({token, message: 'You have successfuly loged in'});
+});
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('token');
+    return res.redirect('/');
 });
 
 module.exports = router;
