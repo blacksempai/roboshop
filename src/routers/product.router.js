@@ -13,5 +13,16 @@ router.get('', async (req, res) => {
     }
 });
 
+router.get('/:id', async (req, res) => {
+    try {
+        const {id} = req.params;
+        const product = await productService.getOneById(id);
+        res.send(product);
+    }
+    catch(e) {
+        res.status(500).end();
+    }
+});
+
 
 module.exports = router;
