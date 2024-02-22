@@ -6,14 +6,12 @@
 }
 
 .img_container {
-    max-height: 80vh;
     display: flex;
     justify-content: center;
 }
 
 .img_container img{
-    height: 100%;
-    object-fit: contain;
+    max-height: 80vh;
 }
 
 .price_container{
