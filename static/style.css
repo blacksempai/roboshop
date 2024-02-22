@@ -49,6 +49,7 @@ header .logo {
 .product_img {
     aspect-ratio: 1 / 1;
     object-fit: contain;
+    max-width: 100%;
 }
 
 .product_footer {
@@ -80,14 +81,36 @@ header .logo {
 .input_wrapper input {
     min-width: 15rem;
     font-size: 1.5rem;
-    font-family: monospace;
-    padding: 0.5rem;
-    outline-color: transparent;
-    border-radius: 8px;
-    border: 2px solid #3c3c3c78;
 }
 
 .t {
     width: 100%;
     border: 0;
+}
+
+.add-modal {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    opacity: 1;
+    transition: all .5s;
+    border-radius: 5px;
+    z-index: 1000;
+    box-shadow: 0 0 10px  gray;
+}
+
+.add-modal img {
+    max-width: 600px;
+    border-radius: 5px;
+}
+
+.add-modal .btn-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.hidden {
+    opacity: 0;
+    visibility: hidden;
 }

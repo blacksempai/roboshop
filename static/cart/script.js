@@ -77,7 +77,7 @@ function recalcTotal() {
     cartTotal.innerHTML = `
         <div>
             <p>Total sum: <b>${totalSum}</b>$</p>
-            <button onclick="order()">Order</button>
+            <button class="btn btn-primary" onclick="order()">Order</button>
         </div>
     `
 }

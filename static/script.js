@@ -5,12 +5,14 @@ async function initProducts() {
     const products = await response.json();
 
     const productsHtml = products.map(p => `
-        <div class="product_item" id="product_${p.id}">
-            <img class="product_img" width="250" src="${p.photo_url}">
-            <a class="product_name" href="/product?id=${p.id}">${p.name}</a>
-            <div class="product_footer">
-                <p class="product_price"> ${p.price}UAH </p>
-                <button class="product_btn" onclick="addToCart(${p.id})">Add to cart</button>
+        <div class="card shadow-sm" id="product_${p.id}">
+            <img src="${p.photo_url}" class="card-img-top product_img" alt="${p.name}">
+            <div class="card-body">
+                <h5 class="card-title"><a class="product_name" href="/product?id=${p.id}">${p.name}</a></h5>
+            </div>
+            <div class="product_footer card-footer d-flex justify-content-between">
+                <p class="product_price fs-4 m-0 text-info"> ${p.price}UAH </p>
+                <button class="btn btn-primary" class="product_btn" onclick="addToCart(${p.id})">Add to cart</button>
             </div>
         </div>
     `);
@@ -32,3 +34,16 @@ async function addToCart(product_id) {
     });
 
 }
+
+const addModalElement = document.getElementById('add-modal');
+
+function closeAddModal() {
+    addModalElement.classList.add('hidden');
+}
+
+const _scrollListener = () => {
+    addModalElement.classList.remove('hidden');
+    document.removeEventListener('scroll', _scrollListener);
+}
+
+document.addEventListener('scroll', _scrollListener);
