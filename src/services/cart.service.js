@@ -11,6 +11,15 @@ async function getCart(id) {
     return cart;
 }
 
+Array.prototype.myReduce = function(callback, initialAccumulator) {
+    let acumulator = initialAccumulator
+    for(let i = 0; i < this.length; i++) {
+        console.log(acumulator, this[i])
+        acumulator = callback(acumulator, this[i]);
+    }
+    return acumulator;
+}
+
 async function getCount(id) {
     const db = await getConnection();
     const cart = await db.all(`SELECT * FROM cart_product WHERE cart_id = ?`, id);
