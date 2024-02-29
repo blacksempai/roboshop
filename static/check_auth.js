@@ -16,14 +16,47 @@ function getCookie(name) {
     return null;
 }
 
+let cartCount = 0;
+
 function checkAuth() {
     const token = getCookie('token');
     if(token) {
         const authContainer = document.getElementById('auth');
         if (authContainer) {
-          authContainer.innerHTML = '<a href="/cart">Cart</a> | <a href="/api/auth/logout">Logout</a>';
+          authContainer.innerHTML = `
+          <a class="btn btn-info position-relative" href="/cart">
+            <span>Cart</span>
+            <span id="cart_badge"></span>
+          </a>
+           | 
+          <a class="btn btn-danger" href="/api/auth/logout">Logout</a>`;
         }
+        fetch('/api/cart/count')
+        .then(res => res.json())
+        .then(res => {
+          cartCount = res.count;
+          document.getElementById('cart_badge').innerHTML = `
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+            <span id="cart_badge_count">${cartCount}</span>
+          </span>
+          `
+        });
     }
+}
+
+const toastLiveExample = document.getElementById('liveToast')
+let toastBootstrap
+
+if (toastLiveExample) {
+  toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+}
+
+function incrementCartCount() {
+  cartCount += 1;
+  document.getElementById('cart_badge_count').innerHTML = cartCount;
+  if(toastBootstrap) {
+    toastBootstrap.show()
+  }
 }
 
 function isAuth() {

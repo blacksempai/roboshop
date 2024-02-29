@@ -11,6 +11,12 @@ router.get('', async (req, res) => {
     return res.send(cart);
 });
 
+router.get('/count', async (req, res) => {
+    const {cart_id} = req.user;
+    const count = await cartService.getCount(cart_id);
+    return res.send({count});
+});
+
 router.put('/item', async (req, res) => {
     const {product_id} = req.body;
     const {cart_id} = req.user;

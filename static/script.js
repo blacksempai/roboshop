@@ -33,6 +33,7 @@ async function addToCart(product_id) {
         }
     });
 
+    incrementCartCount();
 }
 
 const addModalElement = document.getElementById('add-modal');

@@ -11,6 +11,13 @@ async function getCart(id) {
     return cart;
 }
 
+async function getCount(id) {
+    const db = await getConnection();
+    const cart = await db.all(`SELECT * FROM cart_product WHERE cart_id = ?`, id);
+    db.close();   
+    return cart.reduce((a, c) => a + c.quantity, 0);
+}
+
 async function addProductToCart(cart_id, product_id) {
     const db = await getConnection();
 
@@ -52,4 +59,4 @@ async function deleteProductFromCart(cart_id, product_id){
     return;
 }
 
-module.exports = {getCart, addProductToCart, deleteProductFromCart};
+module.exports = {getCart, addProductToCart, deleteProductFromCart, getCount};
