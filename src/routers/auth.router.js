@@ -51,11 +51,7 @@ router.post('/login', async (req, res) => {
 
     const JWT_SECRET = process.env.JWT_SECRET || 'dev_key';
 
-    const token = jsw.sign({
-        login: candidate.login,
-        id: candidate.id, 
-        cart_id: candidate.cart_id
-    }, JWT_SECRET);
+    const token = jsw.sign({id: candidate.id}, JWT_SECRET);
 
     res.cookie('token', token);
     

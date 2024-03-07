@@ -1,6 +1,5 @@
 const getConnection = require("../db/connection");
 
-
 async function getCart(id) {
     const db = await getConnection();
     const cart = await db.all(`
