@@ -1,6 +1,6 @@
 const getConnection = require('../db/connection');
 
-async function createOrder(user, address){
+async function createOrder(cat, address){
     const db = await getConnection();
     const newCart = await db.run('INSERT INTO cart DEFAULT VALUES');
     await db.run(`UPDATE user SET cart_id = ? WHERE id = ?`, newCart.lastID, user.id);
