@@ -77,13 +77,9 @@ function recalcTotal() {
     cartTotal.innerHTML = `
         <div>
             <p>Total sum: <b>${totalSum}</b>$</p>
-            <button class="btn btn-primary" onclick="order()">Order</button>
+            <a class="btn btn-primary" href="/order">Order</a>
         </div>
     `
-}
-
-async function order() {
-    alert('ORDER')
 }
 
 getCart();
