@@ -11,6 +11,7 @@ orderForm.addEventListener('submit', async (event) => {
         },
         body: JSON.stringify({address})
     })
+    window.location = '/order-result'
 }) 
 
 async function getCart() {
@@ -21,7 +22,8 @@ async function getCart() {
     const response = await fetch('/api/cart');
     let cart = await response.json();
     if(!cart.length) {
-        cartContainer.innerHTML = 'Cart is empty';
+        orderContainer.innerHTML = 'Для того щоб оформити замовлення додайте хоча б один продукт в корзину';
+        orderForm.style = 'display: none'
         return;
     }
     orderContainer.innerHTML = cart.map(p => `
