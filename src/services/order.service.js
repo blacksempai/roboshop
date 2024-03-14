@@ -11,4 +11,11 @@ async function createOrder(user_id, address){
     return;
 }
 
-module.exports = {createOrder};
+async function getAllByUserId(user_id){
+    const db = await getConnection();
+    const orders = await db.all('SELECT * FROM orders WHERE user_id = ?', user_id);  
+    db.close();
+    return orders;
+}
+
+module.exports = {createOrder, getAllByUserId};
