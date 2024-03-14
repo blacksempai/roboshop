@@ -34,7 +34,7 @@ async function initProduct(){
 }
 
 async function addToCart(product_id) {
-
+    incrementCartCount();
     const response = await fetch('/api/cart/item', {
         method: 'PUT',
         body:  JSON.stringify({product_id}),
@@ -42,7 +42,6 @@ async function addToCart(product_id) {
             "Content-Type": "application/json",
         }
     });
-
 }
 
 initProduct()
