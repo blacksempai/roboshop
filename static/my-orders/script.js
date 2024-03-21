@@ -6,8 +6,14 @@ async function getOrders(){
     if(orders.length){
         const ordersHtml = orders.map(o => `
             <div class="order-item">
-                ${getStatusHtml(o.status)}
-                <p>Address: ${o.address}</p>
+                <div>
+                    ${getStatusHtml(o.status)}
+                    <p>Address: ${o.address}</p>
+                </div>
+                <ul>
+                    ${o.items.map(p => `<li>${p.name} | ${p.price}$ | x${p.quantity}</li>`).join('')}
+                    <p>Total price: ${o.items.reduce((a,c) => c.price + a, 0)}$</p>
+                </ul>
             </div>
         ` ).join('<hr>')
         orderContainerElem.innerHTML = ordersHtml;
