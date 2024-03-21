@@ -21,9 +21,6 @@ form.addEventListener('submit', async (event) => {
     
     if(response.status == 200) {
         checkAuth();
-        form.reset();
-        setTimeout(() => {
-            window.location = '/';
-        }, 2000);
+        window.location = '/';
     }
 })

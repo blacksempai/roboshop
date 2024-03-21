@@ -24,6 +24,10 @@ function checkAuth() {
         const authContainer = document.getElementById('auth');
         if (authContainer) {
           authContainer.innerHTML = `
+          <a class="btn btn-info position-relative" href="/my-orders">
+            <span>My Orders</span>
+          </a>
+          | 
           <a class="btn btn-info position-relative" href="/cart">
             <span>Cart</span>
             <span id="cart_badge"></span>
