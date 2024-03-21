@@ -7,6 +7,7 @@ async function createOrder(user_id, address){
     const newCart = await db.run('INSERT INTO cart DEFAULT VALUES');
     await db.run(`UPDATE user SET cart_id = ? WHERE id = ?`, newCart.lastID, user.id);
     await db.run(`INSERT INTO orders (status, user_id, cart_id,address) VALUES (?, ?, ?, ?)`, 'NEW', user.id, user.cart_id, address);
+    //TODO: update product quantity
     db.close();
     return;
 }
@@ -27,4 +28,20 @@ async function getAllByUserId(user_id){
     return orders;
 }
 
-module.exports = {createOrder, getAllByUserId};
+async function getAll() {
+    const db = await getConnection();
+    const orders = await db.all('SELECT * FROM orders');  
+    await Promise.all(
+        orders.map(async o => {
+            const items = await db.all(`
+                SELECT p.name, cp.quantity, p.price FROM cart_product AS cp JOIN product AS p ON p.id = cp.product_id  
+                WHERE cp.cart_id = ? 
+            `, o.cart_id);
+            o.items = items;
+        })
+    );
+    db.close();
+    return orders;
+}
+
+module.exports = {createOrder, getAllByUserId, getAll};

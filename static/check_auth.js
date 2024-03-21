@@ -35,6 +35,7 @@ function checkAuth() {
            | 
           <a class="btn btn-danger" href="/api/auth/logout">Logout</a>`;
         }
+
         fetch('/api/cart/count')
         .then(res => res.json())
         .then(res => {
@@ -45,6 +46,20 @@ function checkAuth() {
           </span>
           `
         });
+
+        fetch('/api/settings/is-admin')
+        .then(res => res.json())
+        .then(res => {
+          if(res.isAdmin) {
+            authContainer.innerHTML = `
+              <a class="btn btn-info position-relative" href="/admin">
+                <span>Admin panel</span>
+              </a>
+              | 
+              <a class="btn btn-danger" href="/api/auth/logout">Logout</a>
+            `;
+          }
+        })
     }
 }
 
