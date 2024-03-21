@@ -11,6 +11,7 @@ const doMigration = async () => {
             login TEXT NOT NULL UNIQUE, 
             password TEXT NOT NULL, 
             phone TEXT, 
+            role TEXT CHECK(role IN ('USER','ADMIN')) NOT NULL DEFAULT 'USER',
             cart_id INTEGER UNIQUE NOT NULL, 
             FOREIGN KEY (cart_id) REFERENCES cart(id)
         )
