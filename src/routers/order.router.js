@@ -4,7 +4,7 @@ const orderService = require(`../services/order.service`);
 
 router.post('', async function (req, res){
     await orderService.createOrder(req.user.id, req.body.address);
-
+    //TODO: Додати перевірку на дублі замовлень
     res.status(201).send();
 })
 
