@@ -8,6 +8,7 @@ async function createOrder(user_id, address){
     await db.run(`UPDATE user SET cart_id = ? WHERE id = ?`, newCart.lastID, user.id);
     await db.run(`INSERT INTO orders (status, user_id, cart_id,address) VALUES (?, ?, ?, ?)`, 'NEW', user.id, user.cart_id, address);
     //TODO: update product quantity
+    //TODO: Існують записи з пустою корзиною. Перевірити як це відбувається та виправити
     db.close();
     return;
 }
@@ -30,7 +31,7 @@ async function getAllByUserId(user_id){
 
 async function getAll() {
     const db = await getConnection();
-    const orders = await db.all('SELECT * FROM orders');  
+    const orders = await db.all('SELECT o.*, u.login, u.phone FROM orders AS o JOIN user AS u ON o.user_id == u.id');  
     await Promise.all(
         orders.map(async o => {
             const items = await db.all(`

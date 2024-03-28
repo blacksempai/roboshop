@@ -27,3 +27,9 @@
 .admin_container {
     padding: 1rem;
 }
+
+.icon_button {
+    border: none;
+    background: none;
+    outline: none;
+}
