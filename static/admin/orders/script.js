@@ -44,9 +44,17 @@ function edit(id) {
     `;
 }
 
-editOrderModalSubmit.addEventListener('click', () => {
-    const newStatus = document.getElementById('statusSelect').value;
-    console.log(newStatus, currentOrder);
+editOrderModalSubmit.addEventListener('click', async () => {
+    const status = document.getElementById('statusSelect').value;
+    await fetch(`/api/admin/order/${currentOrder.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({status}),
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+    loadOrders();
+    orderDetailsModal.hide();
 });
 
 function getStatusHtml(status){

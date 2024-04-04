@@ -45,4 +45,12 @@ async function getAll() {
     return orders;
 }
 
-module.exports = {createOrder, getAllByUserId, getAll};
+async function changeStatus(id, status) {
+    const db = await getConnection();
+
+    await db.run('UPDATE orders SET status = ? WHERE id = ?', status, id);
+
+    db.close();
+}
+
+module.exports = {createOrder, getAllByUserId, getAll, changeStatus};
