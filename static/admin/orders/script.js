@@ -1,8 +1,13 @@
 const ordersTableElement = document.getElementById('orders_table');
+const orderDetailsModal = new bootstrap.Modal(document.getElementById('editOrderModal'));
+const editOrderModalContent = document.getElementById('editOrderModalContent');
+const editOrderModalSubmit = document.getElementById('editOrderModalSubmit');
+let orders = [];
+let currentOrder;
 
 async function loadOrders() {
     const res = await fetch('/api/admin/order');
-    const orders = await res.json(); 
+    orders = await res.json(); 
 
     const ordersHtml = orders.map(o => `
         <tr>
@@ -26,14 +31,29 @@ async function loadOrders() {
 }
 
 function edit(id) {
-    alert(`You are editing order id:${id}`)
+    currentOrder = orders.find(o => o.id === id);
+    orderDetailsModal.show();
+    editOrderModalContent.innerHTML = `
+        <select id="statusSelect" class="form-select" value=${currentOrder.status}>
+            <option>Оберіть статус</option>
+            <option ${currentOrder.status === 'NEW' ? 'selected' : ''} value="NEW">Новий</option>
+            <option ${currentOrder.status === 'PROCESS' ? 'selected' : ''} value="PROCESS">В процесі</option>
+            <option ${currentOrder.status === 'DONE' ? 'selected' : ''} value="DONE">Виконаний</option>
+            <option ${currentOrder.status === 'CANCELED' ? 'selected' : ''} value="CANCELED">Скасований</option>
+        </select>
+    `;
 }
+
+editOrderModalSubmit.addEventListener('click', () => {
+    const newStatus = document.getElementById('statusSelect').value;
+    console.log(newStatus, currentOrder);
+});
 
 function getStatusHtml(status){
     switch(status){
         case 'NEW': return '<span class="badge text-bg-success">Новий</span>'
         case 'CANCELED': return '<span class="badge text-bg-danger">Скасований</span>'
-        case 'PENDING': return '<span class="badge text-bg-secondary">Виконаний</span>'
+        case 'DONE': return '<span class="badge text-bg-secondary">Виконаний</span>'
         case 'PROCESS': return '<span class="badge text-bg-warning">В процесі</span>'
         default: return '<span>Статус невідомий</span>'
     }
