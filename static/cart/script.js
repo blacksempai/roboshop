@@ -18,7 +18,7 @@ async function getCart() {
             <img src="${p.photo_url}" alt="${p.name}">
             <p><b>${p.name}</b></p>
             <div class="cart_item_details">
-                <p class="cart_item_price"><b id="price_${p.id}">${p.price * p.quantity}</b>$</p>
+                <p class="cart_item_price"><b id="price_${p.id}">${p.price * p.quantity}</b>₴</p>
                 <p class="cart_item_quantity">
                     <button onclick="deleteItem(${p.id})">-</button> 
                     <span class="cart_item_quantity_number" id="quantity_${p.id}">${p.quantity}</span> 
@@ -76,7 +76,7 @@ function recalcTotal() {
     const totalSum = cart.reduce((a, c) => a + c.price * c.quantity, 0);
     cartTotal.innerHTML = `
         <div>
-            <p>Total sum: <b>${totalSum}</b>$</p>
+            <p>Total sum: <b>${totalSum}</b>₴</p>
             <a class="btn btn-primary" href="/order">Order</a>
         </div>
     `

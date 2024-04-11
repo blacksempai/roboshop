@@ -31,7 +31,7 @@ async function getCart() {
             <img src="${p.photo_url}" alt="${p.name}">
             <p><b>${p.name}</b></p>
             <div class="cart_item_details">
-                <p class="cart_item_price"><b id="price_${p.id}">${p.price * p.quantity}</b>$</p>
+                <p class="cart_item_price"><b id="price_${p.id}">${p.price * p.quantity}</b>₴</p>
                 <p class="cart_item_quantity">
                     <span class="cart_item_quantity_number" id="quantity_${p.id}">${p.quantity}</span> 
                 </p>
@@ -39,7 +39,7 @@ async function getCart() {
         </div>
     `).join('<hr>');
     const totalSum = cart.reduce((a, c) => a + c.price * c.quantity, 0);
-    orderContainer.innerHTML +=  `<p>Total sum: <b>${totalSum}</b>$</p>`
+    orderContainer.innerHTML +=  `<p>Total sum: <b>${totalSum}</b>₴</p>`
 }
 
 getCart();

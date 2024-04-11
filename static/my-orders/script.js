@@ -11,8 +11,8 @@ async function getOrders(){
                     <p>Address: ${o.address}</p>
                 </div>
                 <ul>
-                    ${o.items.map(p => `<li>${p.name} | ${p.price}$ | x${p.quantity}</li>`).join('')}
-                    <p>Total price: ${o.items.reduce((a,c) => c.price + a, 0)}$</p>
+                    ${o.items.map(p => `<li>${p.name} | ${p.price}₴ | x${p.quantity}</li>`).join('')}
+                    <p>Total price: ${o.items.reduce((a,c) => c.price + a, 0)}₴</p>
                 </ul>
             </div>
         ` ).join('<hr>')
