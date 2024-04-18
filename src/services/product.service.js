@@ -16,5 +16,19 @@ async function getOneById(id) {
     return product;
 }
 
+async function save(product) {
+    const db = await getConnection();
+    const {name, quantity, price, description, supplier_id, photo_url} = product;
+    const result = await db.run(
+        `
+        INSERT INTO product (name, quantity, price, description, supplier_id, photo_url)
+        VALUES (?,?,?,?,?,?)
+        `,
+        name, quantity, price, description, supplier_id, photo_url
+    );
+    await db.close();
+    return result;
+}
 
-module.exports = {getAll, getOneById}
+
+module.exports = {getAll, getOneById, save}

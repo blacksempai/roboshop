@@ -1,5 +1,6 @@
 const productsTableElement = document.getElementById("products_table");
-const ProductModal = new bootstrap.Modal(document.getElementById('ProductModal'));
+const modalElement = document.getElementById('ProductModal');
+const ProductModal = new bootstrap.Modal(modalElement);
 const addProductBtn = document.getElementById("addProductBtn");
 const productModalSubmit = document.getElementById("ProductModalSubmit");
 const productForm = document.getElementById("ProductForm");
@@ -22,6 +23,8 @@ async function getProducts(){
     productsTableElement.innerHTML = productsHTML;
 }
 
+let currentProductId = null;
+
 addProductBtn.addEventListener("click", openCreateProductModal);
 productModalSubmit.addEventListener("click", async()=>{
     const product = {
@@ -37,11 +40,25 @@ productModalSubmit.addEventListener("click", async()=>{
         body: JSON.stringify(product),
         headers: {"Content-Type": "application/json"}
     });
+    const data = await result.json();
+    
+    if(result.status !== 201) {
+        return alert(data.message || 'Сталася помилка');
+    }
+    alert('Продукт успішно додано!');
+    productForm.reset();
+    getProducts();
+    ProductModal.hide();
 });
 
 
-function openCreateProductModal(){
+function openCreateProductModal() {
     ProductModal.show();
 }
+
+modalElement.addEventListener('hide.bs.modal', () => {
+    productForm.reset();
+    currentProductId = null;
+});
 
 getProducts();
