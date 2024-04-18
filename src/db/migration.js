@@ -36,6 +36,7 @@ const doMigration = async () => {
             FOREIGN KEY (supplier_id) REFERENCES supplier(id)
         )
     `);
+    //TODO: зберігати також ціну продукту
     await db.run(`
         CREATE TABLE IF NOT EXISTS cart_product (
             id INTEGER PRIMARY KEY, 
