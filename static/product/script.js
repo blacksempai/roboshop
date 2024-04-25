@@ -11,7 +11,7 @@ async function initProduct(){
 
     const result = await fetch(`/api/product/${id}`);
     const product = await result.json();
-
+    //TODO: не відображати інформацію про поставщика, якщо вона відсутня
     productElement.innerHTML = `
         <div class="img_container">
             <img src="${product.photo_url}" alt="${product.name}" />
