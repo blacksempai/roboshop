@@ -30,5 +30,20 @@ async function save(product) {
     return result;
 }
 
+async function edit(id, product) {
+    const db = await getConnection();
+    const {name, quantity, price, description, supplier_id, photo_url} = product;
+    const result = await db.run(
+        `
+        UPDATE product SET name=?, quantity=?, price=?, description=?, supplier_id=?, photo_url=? 
+        WHERE id=? 
+        `,
+        name, quantity, price, description, supplier_id, photo_url, id
+    );
 
-module.exports = {getAll, getOneById, save}
+    await db.close();
+    return result;
+}
+
+
+module.exports = {getAll, getOneById, save, edit}

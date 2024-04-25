@@ -69,7 +69,19 @@ async function saveNewProduct(product){
 }
 
 async function editProduct(product){
-    console.log(product);
+    const result = await fetch("/api/admin/product/" + currentProductId, {
+        method: "PUT",
+        body: JSON.stringify(product),
+        headers: {"Content-Type": "application/json"}
+    });
+    
+    if(result.status !== 204) {
+        return alert('Сталася помилка');
+    }
+    alert('Продукт успішно змінено!');
+    productForm.reset();
+    getProducts();
+    ProductModal.hide();
 }
 
 function openCreateProductModal() {
