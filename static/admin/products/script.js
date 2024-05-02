@@ -4,6 +4,7 @@ const ProductModal = new bootstrap.Modal(modalElement);
 const addProductBtn = document.getElementById("addProductBtn");
 const productModalSubmit = document.getElementById("ProductModalSubmit");
 const productForm = document.getElementById("ProductForm");
+const supplierSelect = document.getElementById('supplier_id');
 let allProducts = [];
 
 async function getProducts(){
@@ -31,6 +32,21 @@ async function getProducts(){
     `).join(" ");
     productsTableElement.innerHTML = productsHTML;
 }
+
+let suppliers = [];
+
+async function getSuppliers() {
+    const response = await fetch('/api/admin/supplier');
+    suppliers = await response.json();
+    suppliers.forEach(supplier => {
+        const option = document.createElement('option');
+        option.innerHTML = supplier.name;
+        option.value = supplier.id;
+        supplierSelect.appendChild(option);
+    });
+}
+
+getSuppliers();
 
 let currentProductId = null;
 
