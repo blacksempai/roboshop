@@ -42,65 +42,44 @@
         </nav>
 
         <div class="admin_container">
-            <h1>Продукти</h1>
-            <button class="btn btn-primary my-3" id="addProductBtn">Додати продукт</button>
+            <h1>Постачальники</h1>
+            <button class="btn btn-primary my-3" id="addSupplierBtn">Додати постачальника</button>
             <table class="table table-hover table-bordered">
                 <thead>
                     <tr>
                         <th>id</th>
                         <th>Назва</th>
-                        <th>Ціна</th>
-                        <th>Опис</th>
-                        <th>Картинка</th>
-                        <th>Постачальник</th>
-                        <th>Кількість на складі</th>
-                        <th>Редагування</th>
+                        <th>Адреса</th>
+                        <th>Контакти</th>
                     </tr>
                 </thead>
-                <tbody id="products_table"></tbody>
+                <tbody id="suppliers_table"></tbody>
             </table>
 
         </div>
 
-        <div class="modal fade" id="ProductModal" tabindex="-1" aria-labelledby="editOrderModalLabel" aria-hidden="true">
+        <div class="modal fade" id="SupplierModal" tabindex="-1" aria-labelledby="editOrderModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="ProductModalLabel">Деталі замовлення</h1>
+                  <h1 class="modal-title fs-5" id="SupplierModalLabel">Постачальник</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="ProductForm">
+                    <form id="SupplierForm">
                         <div class="mb-3">
                             <label for="name" class="form-label">Назва продукту</label>
-                            <input type="text" class="form-control" id="name" placeholder="Назва продукту" name="name">
+                            <input type="text" class="form-control" id="name" placeholder="Назва постачальника" name="name">
                         </div>
 
                         <div class="mb-3">
-                            <label for="price" class="form-label">Ціна продукту</label>
-                            <input type="number" class="form-control" id="price" placeholder="Ціна продукту" name="price">
+                            <label for="address" class="form-label">Адреса постачальника</label>
+                            <input type="text" class="form-control" id="address" placeholder="Адреса постачальника" name="address">
                         </div>
 
                         <div class="mb-3">
-                            <label for="description" class="form-label">Опис продукту</label>
-                            <textarea class="form-control" id="description" rows="3" name="description" placeholder="Опис продукту"></textarea>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="photo_url" class="form-label">Url картинки продукту</label>
-                            <input type="url" class="form-control" id="photo_url" placeholder="Url картинки продукту" name="photo_url">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="supplier_id" class="form-label">Постачальник продукту</label>
-                            <select class="form-select" name="supplier_id" id="supplier_id">
-                                <option selected>Постачальник продукту</option>
-                            </select>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="quantity" class="form-label">Кількість на складі</label>
-                            <input type="number" class="form-control" id="quantity" placeholder="Кількість на складі" name="quantity">
+                            <label for="contact" class="form-label">Контакт постачальника</label>
+                            <input type="text" class="form-control" id="contact" placeholder="Контакт постачальника" name="contact">
                         </div>
 
                     </form>
@@ -108,7 +87,7 @@
 
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
-                  <button id="ProductModalSubmit" type="button" class="btn btn-primary">Зберегти зміни</button>
+                  <button id="SupplierModalSubmit" type="button" class="btn btn-primary">Зберегти зміни</button>
                 </div>
               </div>
             </div>

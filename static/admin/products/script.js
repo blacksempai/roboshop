@@ -11,7 +11,7 @@ async function getProducts(){
     const response = await fetch('/api/product');
     const products = await response.json();
     allProducts = products;
-
+//TODO: Замінити айді p.supplier_id на повну назву
     const productsHTML = products.map(p => `
         <tr>
             <td>${p.id}</td>
@@ -19,7 +19,7 @@ async function getProducts(){
             <td>${p.price}₴</td>
             <td>${p.description}</td>
             <td><img src="${p.photo_url}" width="80" height="80"></td>
-            <td>${p.supplier_id}</td>
+            <td>${p.supplier_id}</td> 
             <td>${p.quantity}</td>
             <td>
                 <button class="icon_button" onclick="openEditModal(${p.id})">
