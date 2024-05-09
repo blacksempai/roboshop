@@ -4,6 +4,7 @@ async function getOrders(){
     const response = await fetch('/api/order')
     const orders = await response.json()
     if(orders.length){
+        //TODO не враховується кількість продукту для підрахунку суми
         const ordersHtml = orders.map(o => `
             <div class="order-item">
                 <div>
