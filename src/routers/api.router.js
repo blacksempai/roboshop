@@ -21,4 +21,5 @@ router.use('/settings', authGuard, settingsRouter);
 
 router.use('/admin', authGuard, adminGuard, adminRouter);
 
+
 module.exports = router;
