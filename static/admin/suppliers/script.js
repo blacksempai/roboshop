@@ -69,7 +69,7 @@ async function editSupplier(supplier) {
     if(result.status !== 204) {
         return alert('Сталася помилка');
     }
-    alert('Продукт успішно змінено!');
+    alert('Постачальник успішно змінений!');
     supplierForm.reset();
     getSuppliers();
     SupplierModal.hide();
