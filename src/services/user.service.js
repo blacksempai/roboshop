@@ -7,4 +7,11 @@ async function getUser(id) {
     return user;
 }
 
-module.exports = {getUser};
+async function getAll() {
+    const db = await getConnection();
+    const users = db.all('SELECT id, login, phone, role, cart_id  FROM user');
+    db.close();
+    return users;
+}
+
+module.exports = {getUser, getAll};
