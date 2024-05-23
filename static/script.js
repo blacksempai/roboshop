@@ -4,6 +4,7 @@ async function initProducts() {
     const response = await fetch('/api/product');
     const products = await response.json();
 
+    //TODO: По кліку на картинку також переходитии на сторінку продукту
     const productsHtml = products.map(p => `
         <div class="card shadow-sm" id="product_${p.id}">
             <img src="${p.photo_url}" class="card-img-top product_img" alt="${p.name}">

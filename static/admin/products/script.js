@@ -11,7 +11,8 @@ async function getProducts(){
     const response = await fetch('/api/product');
     const products = await response.json();
     allProducts = products;
-//TODO: Замінити айді p.supplier_id на повну назву
+//TODO: Замінити айді p.supplier_id на повну назву*
+//TODO: Додати кнопку видалення продукту
     const productsHTML = products.map(p => `
         <tr>
             <td>${p.id}</td>
