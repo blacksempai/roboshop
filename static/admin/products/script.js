@@ -28,6 +28,13 @@ async function getProducts(){
                     </span>
                 </button>
             </td>
+            <td>
+                <button class="icon_button" onclick="deleteProduct(${p.id})">
+                    <span class="material-symbols-outlined">
+                        delete
+                    </span>
+                </button>
+            </td>
         </tr>
     `).join(" ");
     productsTableElement.innerHTML = productsHTML;
@@ -120,5 +127,15 @@ function openEditModal(id){
     productForm.quantity.value = product.quantity;
     ProductModal.show();
 }
+
+async function deleteProduct(id){
+    if(!confirm("Are you sure you want to delete this product")){
+        return;
+    }
+    await fetch(`/api/product/${id}`, 
+    { method: `DELETE` }
+    );
+    getProducts();
+}   
 
 getProducts();

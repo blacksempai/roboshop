@@ -24,5 +24,16 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.delete('/:id', async (req, res) => {
+    try{
+        const {id} = req.params;
+        await productService.deleteById(id);
+        return res.status(204).send();
+    }
+    catch(e){
+        console.log(e);
+        return res.status(500).send({message: e})
+    }
+});
 
 module.exports = router;

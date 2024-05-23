@@ -45,5 +45,12 @@ async function edit(id, product) {
     return result;
 }
 
+async function deleteById(id){
+    const db = await getConnection();
+    await db.run('DELETE FROM product WHERE id=?', id);
 
-module.exports = {getAll, getOneById, save, edit}
+    await db.close();
+}
+
+
+module.exports = {getAll, getOneById, save, edit, deleteById}
