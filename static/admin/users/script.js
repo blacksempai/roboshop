@@ -4,6 +4,8 @@ async function getUsers() {
     const response = await fetch('/api/admin/user');
     const users = await response.json();
 
+    //TODO: Дати можливість змінити роль
+    //TODO: Додати функціонал бану*
     const usersHTML = users.map(u => `
     <tr>
         <td>${u.id}</td>

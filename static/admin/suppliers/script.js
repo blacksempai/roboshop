@@ -6,6 +6,9 @@ const SupplierModalSubmit = document.getElementById('SupplierModalSubmit');
 const supplierForm = document.getElementById('SupplierForm');
 
 addSupplierBtn.addEventListener('click', () => {
+    supplierForm.name.value = '';
+    supplierForm.address.value = '';
+    supplierForm.contact.value = '';
     SupplierModal.show();
 });
 

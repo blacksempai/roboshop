@@ -7,8 +7,8 @@ async function createOrder(user_id, address){
     const newCart = await db.run('INSERT INTO cart DEFAULT VALUES');
     await db.run(`UPDATE user SET cart_id = ? WHERE id = ?`, newCart.lastID, user.id);
     await db.run(`INSERT INTO orders (status, user_id, cart_id,address) VALUES (?, ?, ?, ?)`, 'NEW', user.id, user.cart_id, address);
-    //TODO: update product quantity
-    //TODO: Існують записи з пустою корзиною. Перевірити як це відбувається та виправити
+    //TODO: update product quantity**
+    //TODO: Існують записи з пустою корзиною. Перевірити як це відбувається та виправити**
     db.close();
     return;
 }

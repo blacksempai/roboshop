@@ -4,7 +4,6 @@ async function getOrders(){
     const response = await fetch('/api/order')
     const orders = await response.json()
     if(orders.length){
-        //TODO не враховується кількість продукту для підрахунку суми
         const ordersHtml = orders.map(o => `
             <div class="order-item">
                 <div>
@@ -13,7 +12,7 @@ async function getOrders(){
                 </div>
                 <ul>
                     ${o.items.map(p => `<li>${p.name} | ${p.price}₴ | x${p.quantity}</li>`).join('')}
-                    <p>Total price: ${o.items.reduce((a,c) => c.price + a, 0)}₴</p>
+                    <p>Total price: ${o.items.reduce((a,c) => c.price * c.quantity + a, 0)}₴</p>
                 </ul>
             </div>
         ` ).join('<hr>')
