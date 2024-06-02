@@ -32,7 +32,7 @@ async function getAllByUserId(user_id){
     await Promise.all(
         orders.map(async o => {
             const items = await db.all(`
-                SELECT p.name, cp.quantity, p.price FROM cart_product AS cp JOIN product AS p ON p.id = cp.product_id  
+                SELECT p.name, cp.quantity, cp.price FROM cart_product AS cp JOIN product AS p ON p.id = cp.product_id  
                 WHERE cp.cart_id = ? 
             `, o.cart_id);
             o.items = items;
@@ -48,7 +48,7 @@ async function getAll() {
     await Promise.all(
         orders.map(async o => {
             const items = await db.all(`
-                SELECT p.name, cp.quantity, p.price FROM cart_product AS cp JOIN product AS p ON p.id = cp.product_id  
+                SELECT p.name, cp.quantity, cp.price FROM cart_product AS cp JOIN product AS p ON p.id = cp.product_id  
                 WHERE cp.cart_id = ? 
             `, o.cart_id);
             o.items = items;
@@ -60,8 +60,21 @@ async function getAll() {
 
 async function changeStatus(id, status) {
     const db = await getConnection();
-
+    const order = await db.get('SELECT * FROM orders WHERE id = ?', id);
+    if(order.status === 'DONE' || order.status === 'CANCELED') {
+        throw new Error('This order status can not be changed!');
+    }
+    if(status === 'NEW') {
+        throw new Error('Can not change status to NEW');
+    }
     await db.run('UPDATE orders SET status = ?, edit_date = ? WHERE id = ?', status, new Date().toISOString(), id);
+
+    if(status === 'CANCELED') {
+        const cartProducts = await db.all('SELECT * FROM cart_product WHERE cart_id = ?', order.cart_id);
+        await Promise.all(cartProducts.map(async cp => {
+            await db.run('UPDATE product SET quantity = quantity + ? WHERE id = ?', cp.quantity, cp.product_id);
+        }));
+    }
 
     db.close();
 }

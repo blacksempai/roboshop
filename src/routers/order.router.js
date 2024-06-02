@@ -15,7 +15,6 @@ router.post('', async function (req, res){
 
 router.get('', async function (req, res){
     const orders = await orderService.getAllByUserId(req.user.id)
-
     res.send(orders)
 })
 

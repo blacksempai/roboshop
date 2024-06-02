@@ -8,14 +8,19 @@ router.get('', async (req, res) => {
 
 // PATCH /api/admin/order/2
 router.patch('/:id', async (req, res) => {
-    const {id} = req.params;
-    const {status} = req.body;
-
-    console.log(req.body)
-
-    await orderService.changeStatus(id, status);
-
-    return res.status(204).end();
+    try {
+        const {id} = req.params;
+        const {status} = req.body;
+    
+        console.log(req.body)
+    
+        await orderService.changeStatus(id, status);
+    
+        return res.status(204).end();
+    } catch(e) {
+        console.error(e);
+        res.status(500).send(e);
+    }
 })
 
 module.exports = router;
