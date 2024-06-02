@@ -21,7 +21,7 @@ async function createOrder(user_id, address){
     }));
     const newCart = await db.run('INSERT INTO cart DEFAULT VALUES');
     await db.run(`UPDATE user SET cart_id = ? WHERE id = ?`, newCart.lastID, user.id);
-    await db.run(`INSERT INTO orders (status, user_id, cart_id,address) VALUES (?, ?, ?, ?)`, 'NEW', user.id, user.cart_id, address);
+    await db.run(`INSERT INTO orders (status, user_id, cart_id,address, create_date) VALUES (?, ?, ?, ?, ?)`, 'NEW', user.id, user.cart_id, address, new Date().toISOString());
     db.close();
     return;
 }
@@ -61,7 +61,7 @@ async function getAll() {
 async function changeStatus(id, status) {
     const db = await getConnection();
 
-    await db.run('UPDATE orders SET status = ? WHERE id = ?', status, id);
+    await db.run('UPDATE orders SET status = ?, edit_date = ? WHERE id = ?', status, new Date().toISOString(), id);
 
     db.close();
 }

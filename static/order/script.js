@@ -4,14 +4,20 @@ const orderForm = document.getElementById('order-form')
 orderForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const address = orderForm.address.value;
-    await fetch('/api/order', {
+    const result = await fetch('/api/order', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({address})
     })
-    window.location = '/order-result'
+    if (result.status === 201) {
+        window.location = '/order-result'
+    } else {
+        const data = await result.json();
+        console.log(data);
+        alert(data?.message || 'Сталася помилка при створенні замовлення!')
+    }
 }) 
 
 async function getCart() {

@@ -8,6 +8,7 @@ router.post('', async function (req, res){
         //TODO: Додати перевірку на дублі замовлень*
         res.status(201).send();
     } catch (error) {
+        console.error(error);
         res.status(500).send(error);
     }
 })
