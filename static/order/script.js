@@ -23,7 +23,7 @@ async function getCart() {
     let cart = await response.json();
     if(!cart.length) {
         orderContainer.innerHTML = 'Для того щоб оформити замовлення додайте хоча б один продукт в корзину';
-        orderForm.style = 'display: none'
+        //orderForm.style = 'display: none'
         return;
     }
     orderContainer.innerHTML = cart.map(p => `

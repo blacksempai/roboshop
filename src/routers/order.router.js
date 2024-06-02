@@ -3,9 +3,13 @@ const router = express.Router();
 const orderService = require(`../services/order.service`);
 
 router.post('', async function (req, res){
-    await orderService.createOrder(req.user.id, req.body.address);
-    //TODO: Додати перевірку на дублі замовлень*
-    res.status(201).send();
+    try {
+        await orderService.createOrder(req.user.id, req.body.address);
+        //TODO: Додати перевірку на дублі замовлень*
+        res.status(201).send();
+    } catch (error) {
+        res.status(500).send(error);
+    }
 })
 
 router.get('', async function (req, res){

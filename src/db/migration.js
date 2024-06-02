@@ -36,18 +36,17 @@ const doMigration = async () => {
             FOREIGN KEY (supplier_id) REFERENCES supplier(id)
         )
     `);
-    //TODO: зберігати також ціну продукту**
     await db.run(`
         CREATE TABLE IF NOT EXISTS cart_product (
             id INTEGER PRIMARY KEY, 
             product_id INTEGER NOT NULL, 
             cart_id INTEGER NOT NULL, 
             quantity INTEGER NOT NULL, 
+            price INTEGER,
             FOREIGN KEY (cart_id) REFERENCES cart(id), 
             FOREIGN KEY (product_id) REFERENCES product(id)
         )
     `);
-    //TODO: Додати дату створення замовлення, та останньої зміни статусу#
     await db.run(`
         CREATE TABLE IF NOT EXISTS orders (
             id INTEGER PRIMARY KEY, 
@@ -55,6 +54,8 @@ const doMigration = async () => {
             user_id INTEGER NOT NULL, 
             cart_id INTEGER NOT NULL, 
             address TEXT NOT NULL, 
+            create_date DATETIME,
+            edit_date DATETIME,
             FOREIGN KEY (user_id) REFERENCES user(id), 
             FOREIGN KEY (cart_id) REFERENCES cart(id)
         )
