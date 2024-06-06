@@ -11,7 +11,16 @@ async function initProduct(){
 
     const result = await fetch(`/api/product/${id}`);
     const product = await result.json();
-    //TODO: не відображати інформацію про поставщика, якщо вона відсутня
+    let supplierInfo = '';
+    if(product.supplier_name) {
+        supplierInfo = `
+            <div class="supplier_info">
+                <p>Поставщик: ${product.supplier_name}</p>
+                <p>Адреса поставщика: ${product.address}</p>
+                <p>Телефон поставщика: <a href="tel:${product.contact}">${product.contact}</a></p>
+            </div>
+        `;
+    }
     productElement.innerHTML = `
         <div class="img_container">
             <img src="${product.photo_url}" alt="${product.name}" />
@@ -24,11 +33,7 @@ async function initProduct(){
             </div>
             <p>${product.quantity ? '<span class="badge text-bg-success">в наявності</span> на складі ' + product.quantity + 'шт.': '<span class="badge text-bg-warning">Немає в наявності</span>'}</p>
             <p>${product.description}</p>
-            <div class="supplier_info">
-                <p>Поставщик: ${product.supplier_name}</p>
-                <p>Адреса поставщика: ${product.address}</p>
-                <p>Телефон поставщика: <a href="tel:${product.contact}">${product.contact}</a></p>
-            </div>
+            ${supplierInfo}
         </div>
     `
 }
