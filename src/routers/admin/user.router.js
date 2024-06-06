@@ -19,8 +19,24 @@ router.patch('/:id/role', async (req, res) => {
         await userService.changeRole(id, role)
         return res.status(200).send();
     } catch(e) {
+        console.log(e);
         return res.status(500).send(e)
     }
 })
+
+router.patch('/:id/ban', async (req, res) => {
+    try {
+        const {id} = req.params;
+        if(id == req.user.id) {
+            return res.status(401).send({message: 'Can not edit yourself'})
+        }
+        await userService.ban(id)
+        return res.status(200).send();
+    } catch(e) {
+        console.log(e);
+        return res.status(500).send(e)
+    }
+})
+
 
 module.exports = router;

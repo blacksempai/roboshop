@@ -55,6 +55,10 @@ router.post('/login', async (req, res) => {
         return res.status(401).send({message: 'Password is wrong'});
     }
 
+    if(candidate.is_banned) {
+        return res.status(401).send({message: 'Your account is BANNED'});
+    }
+
     const JWT_SECRET = process.env.JWT_SECRET || 'dev_key';
 
     const token = jsw.sign({id: candidate.id}, JWT_SECRET);

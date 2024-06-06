@@ -11,7 +11,7 @@ async function getUser(id) {
 
 async function getAll() {
     const db = await getConnection();
-    const users = db.all('SELECT id, login, phone, role, cart_id  FROM user');
+    const users = db.all('SELECT id, login, phone, role, cart_id, is_banned  FROM user');
     db.close();
     return users;
 }
@@ -25,4 +25,11 @@ async function changeRole(id, role) {
     db.close();
 }
 
-module.exports = {getUser, getAll, changeRole};
+async function ban(id) {
+    const db = await getConnection();
+    await db.run('UPDATE user SET is_banned = ((is_banned | 1) - (is_banned & 1)) WHERE id = ?', id);
+    db.close();
+}
+
+
+module.exports = {getUser, getAll, changeRole, ban};

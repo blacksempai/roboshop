@@ -6,7 +6,6 @@ async function getUsers() {
     const response = await fetch('/api/admin/user');
     users = await response.json();
 
-    //TODO: Додати функціонал бану*
     const usersHTML = users.map(u => `
     <tr>
         <td>${u.id}</td>
@@ -21,6 +20,14 @@ async function getUsers() {
             </button>
         </td>
         <td>${u.cart_id}</td>
+        <td>
+        ${u.is_banned ? 'ЗАБАНЕНО' : 'БЕЗ ОБМЕЖЕНЬ'}
+        <button class="icon_button" onclick="ban(${u.id})">
+            <span class="material-symbols-outlined">
+                ${u.is_banned ? 'person_check' : 'person_off'}
+            </span>
+        </button>
+    </td>
     </tr>
     
     `).join('');
@@ -28,6 +35,20 @@ async function getUsers() {
 usersTable.innerHTML = usersHTML;
 }
 getUsers();
+
+async function ban(userId) {
+    const user = users.find(u => u.id == userId);
+    if(!user || !confirm(user.is_banned ? 'Ви точно хочете розбанити користувача?' : 'Ви точно хочете забанити користувача?')) {
+        return;
+    }
+    const response = await fetch(`/api/admin/user/${userId}/ban`, {method: 'PATCH'});
+    if(response.status == 200) {
+        getUsers();
+    }   else {
+        const data = await response.json();
+        alert(data.message || 'Unknown error')
+    }
+}
 
 async function editRole(userId) {
     const user = users.find(u => u.id == userId);
