@@ -1,5 +1,7 @@
 const getConnection = require("../db/connection");
 
+const AVAILABLE_ROLES = ['USER', 'ADMIN'];
+
 async function getUser(id) {
     const db = await getConnection();
     const user = db.get('SELECT * FROM user WHERE id = ?', id);
@@ -14,4 +16,13 @@ async function getAll() {
     return users;
 }
 
-module.exports = {getUser, getAll};
+async function changeRole(id, role) {
+    if(!AVAILABLE_ROLES.includes(role)) {
+        throw 'No such role';
+    }
+    const db = await getConnection();
+    await db.run('UPDATE user SET role = ? WHERE id = ?', role, id);
+    db.close();
+}
+
+module.exports = {getUser, getAll, changeRole};

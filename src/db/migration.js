@@ -13,6 +13,8 @@ const doMigration = async () => {
             phone TEXT, 
             role TEXT CHECK(role IN ('USER','ADMIN')) NOT NULL DEFAULT 'USER',
             cart_id INTEGER UNIQUE NOT NULL, 
+            is_activated BOOLEAN,
+            is_banned BOOLEAN,
             FOREIGN KEY (cart_id) REFERENCES cart(id)
         )
     `);
