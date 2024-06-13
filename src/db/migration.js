@@ -25,6 +25,7 @@ const doMigration = async () => {
             contact TEXT
         )
     `);
+    //TODO add sale field
     await db.run(`
         CREATE TABLE IF NOT EXISTS product (
             id INTEGER PRIMARY KEY, 

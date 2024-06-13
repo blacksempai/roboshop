@@ -71,7 +71,7 @@ function getCartHtml(items) {
     return `
         <ul>
             ${items.map(p => `<li>${p.name} | ${p.price}$ | x${p.quantity}</li>`).join('')}
-            <p>Total price: ${items.reduce((a,c) => c.price + a, 0)}$</p>
+            <p>Total price: ${items.reduce((a,c) => c.price * c.quantity + a, 0)}$</p>
         </ul>
     `;
 }

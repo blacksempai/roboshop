@@ -20,7 +20,8 @@
                 <a href="/auth/register">register</a>
             </div>
         </header>
-         <nav>
+       
+        <nav>
             <ul class="nav__list">
                 <li class="nav_item">
                     <a href="/admin" class="nav__link">Home</a>
@@ -32,33 +33,24 @@
                     <a href="/admin/products" class="nav__link">Products</a>
                 </li>
                 <li class="nav_item">
-                    <a href="/admin/users" class="nav__link active">Users</a>
+                    <a href="/admin/users" class="nav__link">Users</a>
                 </li>
                 <li class="nav_item">
                     <a href="/admin/suppliers" class="nav__link">Suppliers</a>
                 </li>
                 <li class="nav_item">
-                    <a href="/admin/analytics" class="nav__link">Analytics</a>
+                    <a href="/admin/analytics" class="nav__link active">Analytics</a>
                 </li>
             </ul>
         </nav>
-<div class="admin_container">
-            <h1>Користувачі</h1>
-            <table class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th>id</th>
-                        <th>Логін</th>
-                        <th>Номер телефону</th>
-                        <th>Роль</th>
-                        <th>Карт id</th>
-                        <th>Стан бану</th>
-                    </tr>
-                </thead>
-                <tbody id="user_table"></tbody>
-            </table>
 
-        </div>
+        <div class="admin_container">
+            <h1>Аналітика</h1>
+
+            <div id="total"></div>
+
+
+          </div>
 
     </main>
     <script src="/check_auth.js"></script>
