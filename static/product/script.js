@@ -29,7 +29,10 @@ async function initProduct(){
             <h1>${product.name}</h1>
             <div class="price_container"> 
                 <p class="price">${product.price} грн</p>
-                <button class="btn btn-primary" onclick="addToCart(${product.id})">Add to cart</button>
+                ${product.quantity ? 
+                    `<button class="btn btn-primary" onclick="addToCart(${product.id})">Add to cart</button>` : 
+                    `<button class="btn" disabled>Немає в наявності</button>`
+                }
             </div>
             <p>${product.quantity ? '<span class="badge text-bg-success">в наявності</span> на складі ' + product.quantity + 'шт.': '<span class="badge text-bg-warning">Немає в наявності</span>'}</p>
             <p>${product.description}</p>

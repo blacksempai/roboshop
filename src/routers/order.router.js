@@ -8,7 +8,7 @@ router.post('', async function (req, res){
         res.status(201).send();
     } catch (error) {
         console.error(error);
-        res.status(500).send(error);
+        res.status(500).send({message: error.message});
     }
 })
 

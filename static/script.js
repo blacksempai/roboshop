@@ -14,7 +14,10 @@ async function initProducts() {
             </div>
             <div class="product_footer card-footer d-flex justify-content-between">
                 <p class="product_price fs-4 m-0 text-info"> ${p.price}UAH </p>
-                <button class="btn btn-primary" class="product_btn" onclick="addToCart(${p.id})">Add to cart</button>
+                ${p.quantity ? 
+                    `<button class="btn btn-primary" class="product_btn" onclick="addToCart(${p.id})">Add to cart</button>`: 
+                    `<button class="btn" disabled>Немає в наявності</button>`
+                }
             </div>
         </div>
     `);
