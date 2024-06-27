@@ -65,7 +65,8 @@ const doMigration = async () => {
         )
     `);
     const users = await db.all('SELECT * FROM user;')
-    const roles = users.map(u => u.roles);
+    const roles = users.map(u => u.role);
+    console.log(roles)
     if(!roles.includes('ADMIN')) {
         const defaultAdminLogin = process.env.DEFAULT_ADMIN_LOGIN || 'admin';
         const defaultAdminPassword = process.env.DEFAULT_ADMIN_PASSWORD || 'admin';
