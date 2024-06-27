@@ -1,4 +1,5 @@
 const getConnection = require('./connection');
+const authService = require('../services/auth.service');
 
 const doMigration = async () => {
     const db = await getConnection();
@@ -62,6 +63,15 @@ const doMigration = async () => {
             FOREIGN KEY (cart_id) REFERENCES cart(id)
         )
     `);
+    const users = await db.all('SELECT * FROM users;')
+    const roles = users.map(u => u.roles);
+    if(!roles.includes('ADMIN')) {
+        const defaultAdminLogin = process.env.DEFAULT_ADMIN_LOGIN || 'admin';
+        const defaultAdminPassword = process.env.DEFAULT_ADMIN_PASSWORD || 'admin';
+        const salt = await bcrypt.genSalt();
+        const hashedPassword = await bcrypt.hash(defaultAdminPassword, salt);
+        const result = await authService.registerUser(defaultAdminLogin, hashedPassword, '-');
+    }
     await db.close();
     console.log('DB is ready!');
 }
