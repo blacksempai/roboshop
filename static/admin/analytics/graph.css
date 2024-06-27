@@ -1,0 +1,11 @@
+canvas {
+    border: 1px solid black;
+}
+
+.graph-container {
+    padding: 4rem;
+    display: flex;
+    gap: 5rem;
+    align-items: center;
+    justify-content: center;
+}

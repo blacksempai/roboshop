@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="/style.css">
     <link rel="stylesheet" href="/admin/admin_style.css">
+    <link rel="stylesheet" href="graph.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 </head>
 <body>
     <main>
@@ -50,7 +52,13 @@
             <div id="total"></div>
 
 
-          </div>
+        </div>
+
+        <div class="graph-container">
+            <canvas id="canvas" width="500" height="500"></canvas>
+        </div>
+
+        <canvas id="canvas2" width="500" height="500"></canvas>
 
     </main>
     <script src="/check_auth.js"></script>
