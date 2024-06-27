@@ -1,5 +1,6 @@
 const getConnection = require('./connection');
 const authService = require('../services/auth.service');
+const bcrypt = require('bcrypt'); 
 
 const doMigration = async () => {
     const db = await getConnection();
